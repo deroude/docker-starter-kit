@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="lds-ripple" *ngIf="!poem">
+    <div></div>
+    <div></div>
+  </div>
+
+  <article class="poem" *ngIf="!!poem">
+    <header>
+      <h1>{{poem.title}}</h1>
+      <h2>by {{poem.author}}</h2>
+    </header>
+    <main>
+      <p *ngFor="let stanza of poem.stanzas; let i=index">
+        <ng-container *ngFor="let v of stanza">
+          {{v}} <br />
+        </ng-container>
+      </p>
+    </main>
+  </article>
+</div>
