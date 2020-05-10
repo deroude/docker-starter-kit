@@ -1,4 +1,4 @@
-FROM node:12
+FROM node:current-alpine
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -16,4 +16,4 @@ RUN npm ci --only=production
 COPY . .
 
 EXPOSE 3000
-CMD [ "node", "server.js" ]
+CMD [ "node", "index.js" ]

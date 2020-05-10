@@ -1,7 +1,7 @@
 ### STAGE 1: Build ###
 
 # We label our stage as ‘builder’
-FROM node:12 as builder
+FROM node:current-alpine as builder
 
 COPY package.json package-lock.json ./
 
@@ -26,10 +26,12 @@ RUN npm run build
 
 ### STAGE 2: Setup ###
 
-FROM nginx:1.17-alpine
+FROM nginx:stable-alpine
 
 ## Remove default nginx website
 RUN rm -rf /usr/share/nginx/html/*
 
 ## From ‘builder’ stage copy over the artifacts in dist folder to default nginx public folder
-COPY --from=builder /ng-app/target/www /usr/share/nginx/html
+COPY --from=builder /ng-app/dist/web /usr/share/nginx/html
+
+COPY ./nginx.conf /etc/nginx/nginx.conf

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../environments/environment';
 
 interface Poem {
   title: string;
@@ -19,7 +20,7 @@ export class AppComponent implements OnInit {
   poem: Poem;
 
   ngOnInit() {
-    this.http.get<Poem>('http://localhost:3000/random-poem').subscribe(poem => {
+    this.http.get<Poem>(`${environment.apiUrl}/random-poem`).subscribe(poem => {
       this.poem = poem;
     });
   }
